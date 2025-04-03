@@ -12,13 +12,11 @@
 }
 
 .auth-box {
-    position: relative;
     background: rgba(255, 255, 255, 0.1);
     padding: 2rem;
     border-radius: 12px;
     backdrop-filter: blur(10px);
     box-shadow: 0 0 10px rgba(0, 255, 170, 0.5);
-    z-index: 1;
     max-width: 400px;
     width: 90%;
     text-align: center;
@@ -74,14 +72,24 @@
     color: white;
 }
 
-.switch-auth a {
+.register-link {
     color: #00ffaa;
-    text-decoration: none;
     font-weight: bold;
-    transition: all 0.3s ease-in-out;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
-.switch-auth a:hover {
+.register-link:hover {
     text-shadow: 0 0 10px #00ffaa;
+}
+
+/* Error Message Styling */
+.error-message {
+    color: #ff5555;
+    background: rgba(255, 85, 85, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    box-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
 }
