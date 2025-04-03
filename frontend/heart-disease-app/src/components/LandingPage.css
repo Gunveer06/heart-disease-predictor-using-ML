@@ -1,0 +1,165 @@
+.landing-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url("../images/background.jpg") no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+/* Overlay for better text readability */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+/* Title Styling */
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 1);
+    z-index: 2;
+}
+
+/* Animated Text */
+.typed-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #00ffcc;
+    z-index: 2;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 1);
+    min-height: 40px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Buttons */
+.buttons-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 25px;
+    z-index: 3;
+    position: relative;
+}
+
+/* Neon Button */
+.neon-btn {
+    background: linear-gradient(45deg, #ff3366, #ff6699);
+    color: white;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.neon-btn:hover {
+    background: linear-gradient(45deg, #ff6699, #ff3366);
+    box-shadow: 0 0 25px rgba(255, 51, 102, 1);
+    transform: scale(1.1);
+}
+
+/* Outline Button */
+.outline-btn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.outline-btn:hover {
+    background: white;
+    color: black;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+/* 🌊 Continuous CSS Wave Animation */
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    background: linear-gradient(to top, #111, transparent);
+    z-index: 2;
+}
+
+/* First Wave */
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100px;
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    opacity: 0.7;
+    clip-path: polygon(0% 50%, 10% 65%, 25% 55%, 40% 70%, 60% 50%, 75% 60%, 90% 45%, 100% 50%, 100% 100%, 0% 100%);
+    animation: wave-animation 8s linear infinite;
+}
+
+/* Second Wave - Slightly Delayed */
+.wave.wave2 {
+    bottom: 10px;
+    opacity: 0.5;
+    animation: wave-animation 12s linear infinite reverse;
+}
+
+/* 🌀 Wave Animation */
+@keyframes wave-animation {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .typed-text {
+        font-size: 1.4rem;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .neon-btn,
+    .outline-btn {
+        width: 80%;
+        justify-content: center;
+    }
+
+    .wave {
+        height: 80px;
+    }
+}

@@ -1,0 +1,170 @@
+/* 🌟 Full-Page Background with Blur Effect */
+.heart-disease-container {
+    background: url("../images/background.jpg") no-repeat center center/cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* 🌟 Main Form Container */
+.heart-disease-container .form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.3);
+    text-align: center;
+    color: white;
+}
+
+/* 🌟 Form Title */
+.heart-disease-container .form-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffff;
+    margin-bottom: 15px;
+}
+
+/* 🌟 Step-by-Step Form */
+.heart-disease-container .form-step {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 🌟 Input Fields */
+.heart-disease-container .input-field {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    background: #1a01ff3e;
+    color: rgb(255, 255, 255);
+    outline: none;
+    transition: 0.3s ease-in-out;
+}
+
+.heart-disease-container .input-field::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.heart-disease-container .input-field:focus {
+    box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.5);
+}
+
+/* 🌟 Dropdown (Select) Menu */
+.heart-disease-container .input-field select {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background for better contrast */
+    color: rgb(0, 0, 0);
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+/* 🌟 Dropdown Options (Visible Text) */
+.heart-disease-container .input-field select option {
+    background-color: #222; /* Dark gray */
+    color: white !important;  /* Ensure text remains white */
+    padding: 10px;
+}
+
+/* 🌟 Hover Effect on Dropdown Options */
+.heart-disease-container .input-field select option:hover {
+    background-color: #00ffff;
+    color: black;
+}
+
+/* 🌟 Custom Scrollbar for Dropdown */
+.heart-disease-container .input-field select::-webkit-scrollbar {
+    width: 10px;
+}
+
+.heart-disease-container .input-field select::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 10px;
+}
+
+.heart-disease-container .input-field select::-webkit-scrollbar-thumb {
+    background: #00ffff;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.heart-disease-container .input-field select::-webkit-scrollbar-thumb:hover {
+    background: #ff00ff;
+}
+
+/* 🌟 Neon Buttons */
+.heart-disease-container .neon-btn {
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.heart-disease-container .neon-btn:hover {
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
+    transform: scale(1.05);
+}
+
+/* 🌟 Outline Button */
+.heart-disease-container .outline-btn {
+    background: transparent;
+    border: 2px solid #00ffff;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.heart-disease-container .outline-btn:hover {
+    background: #00ffff;
+    color: black;
+}
+
+/* 🌟 Result Text */
+.heart-disease-container .result-text {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ff00ff;
+}
+
+/* 🌟 Custom Scrollbar for Whole Page (Scoped) */
+.heart-disease-container ::-webkit-scrollbar {
+    width: 10px;
+}
+
+.heart-disease-container ::-webkit-scrollbar-track {
+    background: black;
+    border-radius: 10px;
+}
+
+.heart-disease-container ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #ff00ff, #00ffff);
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.heart-disease-container ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #00ffff, #ff00ff);
+}

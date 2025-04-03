@@ -1,0 +1,43 @@
+.feature-section {
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+}
+
+.feature-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+}
+
+.feature-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.feature-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+}
+
+.feature-box h3 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+.feature-box p {
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: #ffcc00;
+    text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.7);
+}

@@ -1,0 +1,55 @@
+/* Global Styles */
+body {
+  background-color: #121212;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Landing Page */
+.landing {
+  margin: 50px;
+}
+
+.title {
+  font-size: 32px;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.2);
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Neon Button */
+.neon-btn {
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.neon-btn:hover {
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+}
