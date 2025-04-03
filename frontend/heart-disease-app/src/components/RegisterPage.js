@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./LoginPage.css";
+import "./RegisterPage.css";
 
-const LoginPage = () => {
+const RegisterPage = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleLogin = (e) => {
+    const handleRegister = (e) => {
         e.preventDefault();
-        console.log("Logging in with:", { username, password });
-        // Add authentication logic here
+        console.log("Registering with:", { username, email, password });
+        // Add registration logic here
     };
 
     return (
         <div className="auth-container">
             <div className="auth-box">
-                <h2 className="auth-title">Login</h2>
+                <h2 className="auth-title">Register</h2>
 
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleRegister}>
                     {/* Username Input */}
                     <input
                         type="text"
@@ -26,6 +27,16 @@ const LoginPage = () => {
                         placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+
+                    {/* Email Input */}
+                    <input
+                        type="email"
+                        className="auth-input"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                     />
 
@@ -40,16 +51,16 @@ const LoginPage = () => {
                     />
 
                     {/* Submit Button */}
-                    <button type="submit" className="neon-btn">Login</button>
+                    <button type="submit" className="neon-btn">Register</button>
                 </form>
 
-                {/* Switch to Register Page */}
+                {/* Switch to Login Page */}
                 <p className="switch-auth">
-                    Not registered? <a onClick={() => navigate("/register")}>Create an account</a>
+                    Already have an account? <a onClick={() => navigate("/login")}>Login</a>
                 </p>
             </div>
         </div>
     );
 };
 
-export default LoginPage;
+export default RegisterPage;

@@ -44,8 +44,8 @@ const LandingPage = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 1 }}
             >
-                {/* ✅ Navigate to "/predict" on button click */}
-                <button className="neon-btn" onClick={() => navigate("/predict")}>
+                {/* ✅ Navigate to "/login" on button click (lowercase) */}
+                <button className="neon-btn" onClick={() => navigate("/login")}>
                     Get Started <FaRobot />
                 </button>
 
