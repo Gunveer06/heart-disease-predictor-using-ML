@@ -26,27 +26,27 @@ public class UserAuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody Map<String, Object> requestBody) {
-        String loginQuery = "SELECT COUNT(*) FROM users WHERE (username = ? OR email = ?) AND password = ?";
+        String loginQuery = "SELECT COUNT(*) FROM users WHERE username = ? AND password = ?";
 
         try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(loginQuery)) {
 
             stmt.setString(1, (String) requestBody.get("username"));
-            stmt.setString(2, (String) requestBody.get("username")); // Allow login with email too
-            stmt.setString(3, (String) requestBody.get("password"));
+            stmt.setString(2, (String) requestBody.get("password"));
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next() && rs.getInt(1) > 0) {
                 return ResponseEntity.ok("1");  // Login successful
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("0");  // User not found
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("0");  // Invalid credentials
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Database error");
         }
     }
+
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Map<String, Object> requestBody) {

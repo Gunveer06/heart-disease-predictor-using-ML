@@ -15,19 +15,19 @@ const RegisterPage = () => {
         setMessage(""); // Clear previous messages
 
         try {
-            const response = await fetch("http://localhost:8080/api/auth/register", {
+            const response = await fetch("http://127.0.0.1:8080/api/auth/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, email, password }),
             });
 
-            const data = await response.json();
+            const textData = await response.text(); // Backend returns a string, not JSON
 
-            if (data.success) {
+            if (response.ok) {
                 setMessage("Registration successful! Redirecting to login...");
-                setTimeout(() => navigate("/login"), 2000); // Redirect after 2 sec
+                setTimeout(() => navigate("/login"), 2000);
             } else {
-                setMessage("Error registering. Please try again.");
+                setMessage(textData || "Error registering. Please try again.");
             }
         } catch (error) {
             setMessage("Server error. Please try again later.");

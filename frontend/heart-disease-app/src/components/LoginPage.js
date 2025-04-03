@@ -14,16 +14,16 @@ const LoginPage = () => {
         setError(""); // Clear previous errors
 
         try {
-            const response = await fetch("http://localhost:8080/api/auth/login", {
+            const response = await fetch("http://127.0.0.1:8080/api/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
             });
 
-            const data = await response.json();
+            const responseData = await response.text(); // Read response as plain text
 
-            if (data.response === 1) {
-                navigate("/dashboard"); // ✅ Redirect to dashboard on success
+            if (response.ok && responseData.trim() === "1") {
+                navigate("/dashboard"); // ✅ Redirect to dashboard if success
             } else {
                 setError("Invalid username or password. Please try again.");
             }
