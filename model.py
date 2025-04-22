@@ -121,18 +121,18 @@ model.fit(X_scaled, y)
 app = Flask(__name__)
 CORS(app)  # ✅ Enable CORS
 
-# API endpoint to predict heart disease risk
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
         data = request.get_json()
         if "features" not in data:
             return jsonify({"error": "Missing 'features' key"}), 400
-        
-        features = np.array(data["features"]).reshape(1, -1)
+
+        # Convert features to a numpy array
+        features = np.array(data["features"], dtype=np.float64).reshape(1, -1)
         data_scaled = scaler.transform(features)
-        probability = model.predict_proba(data_scaled)[0][1]  # Get probability of heart disease
-        
+        probability = model.predict_proba(data_scaled)[0][1]  # Probability of heart disease
+
         return jsonify({"heart_disease_risk": f"{probability * 100:.2f}%"})
 
     except Exception as e:

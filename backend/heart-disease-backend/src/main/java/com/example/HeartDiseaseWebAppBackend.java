@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,7 +37,7 @@ public class HeartDiseaseWebAppBackend {
     // Database Connection Details
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/heart_disease_db";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "your_password";
+    private static final String JDBC_PASSWORD = "Raghav#2930";
 
     public static void main(String[] args) {
         SpringApplication.run(HeartDiseaseWebAppBackend.class, args);
@@ -46,32 +50,76 @@ public class HeartDiseaseWebAppBackend {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
+        // 1. Extract and encode features for the Flask API
+        List<Object> features = new ArrayList<>();
+
+        // Age (int)
+        features.add(requestBody.get("age"));
+
+        // Gender: male=1, female=0 (encode String to int)
+        String gender = ((String) requestBody.get("gender")).toLowerCase();
+        features.add(gender.equals("male") ? 1 : 0);
+
+        // Chest Pain Type (int)
+        features.add(requestBody.get("chestPain"));
+
+        // Blood Pressure (int)
+        features.add(requestBody.get("bp"));
+
+        // Cholesterol (int)
+        features.add(requestBody.get("cholesterol"));
+
+        // Sugar Level (int)
+        features.add(requestBody.get("sugarLevel"));
+
+        // ECG Issues (int)
+        features.add(requestBody.get("ecgIssues"));
+
+        // Max Heart Rate (int)
+        features.add(requestBody.get("maxHr"));
+
+        // Oldpeak (double)
+        features.add(Double.parseDouble(requestBody.get("oldpeak").toString()));
+
+        // ST Slope (int)
+        features.add(requestBody.get("stSlope"));
+
+        // Exercise Angina: yes=1, no=0 (encode String to int)
+        String exerciseAngina = ((String) requestBody.get("exerciseAngina")).toLowerCase();
+        features.add(exerciseAngina.equals("yes") ? 1 : 0);
+
+        // 2. Build payload for Flask API
+        Map<String, Object> flaskPayload = new HashMap<>();
+        flaskPayload.put("features", features);
+
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(flaskPayload, headers);
 
         try {
             System.out.println("🔄 Sending request to Flask API: " + PYTHON_API_URL);
-            System.out.println("📦 Request Body: " + requestBody);
+            System.out.println("📦 Request Body: " + flaskPayload);
 
-            ResponseEntity<String> response = restTemplate.exchange(PYTHON_API_URL, HttpMethod.POST, entity, String.class);
+            ResponseEntity<String> response = restTemplate.exchange(
+                    PYTHON_API_URL, HttpMethod.POST, entity, String.class
+            );
 
             System.out.println("✅ Response from Flask API: " + response.getBody());
-
             insertOrUpdateDatabase(requestBody, response.getBody());
-
             return ResponseEntity.ok(response.getBody());
 
         } catch (Exception e) {
             System.err.println("❌ General Error: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing request: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error processing request: " + e.getMessage());
         }
     }
 
+
     private void insertOrUpdateDatabase(Map<String, Object> requestBody, String predictionResult) {
-        String checkSql = "SELECT COUNT(*) FROM user_predictions WHERE user_id = ?";
-        String insertSql = "INSERT INTO user_predictions (user_id, name, age, gender, chest_pain, bp, cholesterol, sugar_level, ecg_issues, " +
+        String checkSql = "SELECT COUNT(*) FROM heart_disease_data WHERE user_id = ?";
+        String insertSql = "INSERT INTO heart_disease_data (user_id, name, age, gender, chest_pain, bp, cholesterol, sugar_level, ecg_issues, " +
                 "max_hr, exercise_angina, oldpeak, st_slope, prediction_result) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        String updateSql = "UPDATE user_predictions SET name=?, age=?, gender=?, chest_pain=?, bp=?, cholesterol=?, sugar_level=?, " +
+        String updateSql = "UPDATE heart_disease_data SET name=?, age=?, gender=?, chest_pain=?, bp=?, cholesterol=?, sugar_level=?, " +
                 "ecg_issues=?, max_hr=?, exercise_angina=?, oldpeak=?, st_slope=?, prediction_result=? WHERE user_id=?";
 
         try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);

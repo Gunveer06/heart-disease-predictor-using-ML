@@ -24,7 +24,7 @@ public class DashboardController {
 
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/your_database";
     private static final String JDBC_USER = "your_username";
-    private static final String JDBC_PASSWORD = "your_password";
+    private static final String JDBC_PASSWORD = "Raghav#2930";
 
     @GetMapping("/features/{username}")
     public ResponseEntity<Map<String, Object>> getUserFeatures(@PathVariable String username) {
