@@ -22,11 +22,11 @@ public class UserAuthController {
 
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/heart_disease_db";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "Raghav#2930";
+    private static final String JDBC_PASSWORD = "Gunveer@240506";
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody Map<String, Object> requestBody) {
-        String loginQuery = "SELECT COUNT(*) FROM users WHERE username = ? AND password = ?";
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Map<String, Object> requestBody) {
+        String loginQuery = "SELECT user_id, username FROM users WHERE username = ? AND password = ?";
 
         try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(loginQuery)) {
@@ -36,17 +36,23 @@ public class UserAuthController {
 
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next() && rs.getInt(1) > 0) {
-                return ResponseEntity.ok("1");  // Login successful
+            if (rs.next()) {
+                // Login successful
+                Map<String, Object> response = Map.of(
+                    "status", "success",
+                    "userId", rs.getInt("user_id"),
+                    "username", rs.getString("username")
+                );
+                return ResponseEntity.ok(response);
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("0");  // Invalid credentials
+                // Invalid credentials
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("status", "failure"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Database error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("status", "error", "message", "Database error"));
         }
     }
-
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Map<String, Object> requestBody) {

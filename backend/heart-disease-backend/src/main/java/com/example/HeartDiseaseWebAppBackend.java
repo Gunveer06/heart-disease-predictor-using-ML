@@ -5,11 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,7 +36,7 @@ public class HeartDiseaseWebAppBackend {
     // Database Connection Details
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/heart_disease_db";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "Raghav#2930";
+    private static final String JDBC_PASSWORD = "Gunveer@240506";
 
     public static void main(String[] args) {
         SpringApplication.run(HeartDiseaseWebAppBackend.class, args);

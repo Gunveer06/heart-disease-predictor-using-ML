@@ -62,7 +62,7 @@ const HeartDiseasePredictor = () => {
                 exerciseAngina: state.exerciseAngina === "1" ? "yes" : "no",
                 oldpeak: Number(state.oldpeak),
                 stSlope: Number(state.stSlope),
-                userId: 1 // Replace with actual user ID if needed
+                userId: 1 
             };
 
             const response = await fetch("http://127.0.0.1:8080/api/heart-disease/predict", {

@@ -15,7 +15,7 @@ const ResultPage = () => {
                     ? "⚠️ Something went wrong. Please try again."
                     : `🫀 Your heart disease risk: ${result}`}
             </p>
-            <button className="home-btn" onClick={() => navigate("/")}>Back to Home</button>
+            <button className="home-btn" onClick={() => navigate("/dashboard")}>Back to Home</button>
         </div>
     );
 };

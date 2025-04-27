@@ -8,11 +8,17 @@ const RegisterPage = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState("");
 
     const handleRegister = async (e) => {
         e.preventDefault();
         setMessage(""); // Clear previous messages
+
+        if (password !== confirmPassword) {
+            setMessage("Passwords do not match.");
+            return;
+        }
 
         try {
             const response = await fetch("http://127.0.0.1:8080/api/auth/register", {
@@ -65,6 +71,14 @@ const RegisterPage = () => {
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    className="auth-input"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                 />
                 <button type="submit" className="neon-btn">Register</button>

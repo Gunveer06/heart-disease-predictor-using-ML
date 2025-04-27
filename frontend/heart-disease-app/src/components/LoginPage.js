@@ -20,15 +20,24 @@ const LoginPage = () => {
                 body: JSON.stringify({ username, password }),
             });
 
-            const responseData = await response.text(); // Read response as plain text
+            const responseData = await response.json(); // Read response as JSON
 
-            if (response.ok && responseData.trim() === "1") {
-                navigate("/dashboard"); // ✅ Redirect to dashboard if success
+            // Debugging logs
+            console.log("Response Status:", response.status);
+            console.log("Response Data:", responseData);
+
+            if (response.ok && responseData.status === "success") {
+                // Store userId in localStorage or state management
+                localStorage.setItem("userId", responseData.userId);
+
+                // Redirect to the dashboard
+                navigate("/dashboard");
             } else {
                 setError("Invalid username or password. Please try again.");
             }
         } catch (error) {
             setError("Server error. Please try again later.");
+            console.error("Login Error:", error);
         }
     };
 
