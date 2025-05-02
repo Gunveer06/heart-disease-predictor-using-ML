@@ -31,7 +31,7 @@ import org.springframework.web.client.RestTemplate;
 @CrossOrigin(origins = "http://localhost:3000")
 public class HeartDiseaseWebAppBackend {
 
-    private static final String PYTHON_API_URL = "http://127.0.0.1:5000/predict"; // Flask API URL
+    private static final String PYTHON_API_URL = "http://127.0.0.1:5002/predict"; // Flask API URL
 
     // Database Connection Details
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/heart_disease_db";

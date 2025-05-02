@@ -122,72 +122,18 @@ for train_idx, val_idx in kf.split(X_trainval, y_trainval):
 print(f"K-Fold Accuracies: {fold_accuracies}")
 print(f"Mean CV Accuracy: {np.mean(fold_accuracies):.2f}")
 
-# Define epochs and simulated loss values BEFORE using them in plots
-epochs = np.arange(1, 21)
-# Generate a decreasing "loss" curve from ~0.5 to ~0.1
-train_loss = 0.5 * np.exp(-0.1 * epochs) + 0.1 + 0.05 * np.random.randn(len(epochs))
-val_loss = 0.6 * np.exp(-0.08 * epochs) + 0.15 + 0.08 * np.random.randn(len(epochs))
-
-# Train final model
-scaler = StandardScaler()
-X_trainval_scaled = scaler.fit_transform(X_trainval)
-X_test_scaled = scaler.transform(X_test)
-
-model = RandomForest(n_trees=10, max_depth=10)
-model.fit(X_trainval_scaled, y_trainval)
-
-# Evaluate on hold-out test set
-y_test_pred = model.predict(X_test_scaled)
-test_accuracy = np.mean(y_test_pred == y_test)
-print(f"Final Test Accuracy (Hold-Out Set): {test_accuracy:.2f}")
-
-# Create plots for poster - FIRST FIGURE
-plt.figure(figsize=(10, 4))
-plt.subplot(1, 2, 1)
-plt.plot(range(1, len(fold_accuracies)+1), fold_accuracies, 'b-o', linewidth=2)
+plt.figure(figsize=(6, 4))
+plt.plot(range(1, len(fold_accuracies) + 1), fold_accuracies, 'b-o', linewidth=2)
 plt.title('Cross-Validation Accuracy per Fold')
 plt.xlabel('Fold')
 plt.ylabel('Accuracy')
 plt.ylim(0.7, 1.0)
 plt.grid(True)
 
-plt.subplot(1, 2, 2)
-plt.plot(epochs, train_loss, 'b-', label='Training Loss')
-plt.plot(epochs, val_loss, 'r-', label='Validation Loss')
-plt.title('Training and Validation Loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-plt.grid(True)
-
 plt.tight_layout()
 plt.savefig('model_performance.png', dpi=300, bbox_inches='tight')
 plt.show()
 
-# Calculate accuracy from loss (for visualization purposes)
-train_acc = 1 - train_loss
-val_acc = 1 - val_loss
-
-# Create second figure for poster
-plt.figure(figsize=(10, 4))
-plt.subplot(1, 2, 1)
-plt.plot(epochs, train_acc, 'b-', label='Training Accuracy')
-plt.plot(epochs, val_acc, 'r-', label='Validation Accuracy')
-plt.title('Training and Validation Accuracy')
-plt.xlabel('Epochs')
-plt.ylabel('Accuracy')
-plt.legend()
-plt.grid(True)
-
-plt.subplot(1, 2, 2)
-plt.bar(['CV Accuracy', 'Test Accuracy'], [np.mean(fold_accuracies), test_accuracy])
-plt.title('Model Evaluation')
-plt.ylim(0.7, 1.0)
-plt.grid(axis='y')
-
-plt.tight_layout()
-plt.savefig('model_comparison.png', dpi=300, bbox_inches='tight')
-plt.show()
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -207,4 +153,4 @@ def predict():
 
 # Run Flask API only when the script is executed directly
 if __name__== "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)  # ✅ Disable debug mode to prevent double execution
+    app.run(host="0.0.0.0", port=5002, debug=False)  # ✅ Disable debug mode to prevent double execution

@@ -35,7 +35,7 @@ const LoginPage = () => {
             } else {
                 setError("Invalid username or password. Please try again.");
             }
-        } catch (error) {
+        } catch (error) {   
             setError("Server error. Please try again later.");
             console.error("Login Error:", error);
         }

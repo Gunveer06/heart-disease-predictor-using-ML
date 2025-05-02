@@ -6,6 +6,7 @@ import RegisterPage from "./components/RegisterPage";
 import Dashboard from "./components/Dashboard"; // ✅ Import Dashboard
 import HeartDiseasePredictor from "./components/HeartDiseasePredictor";
 import ResultPage from "./components/ResultPage";
+import LearnMore from "./components/Learnmore";
 import "./App.css";
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
                 <Route path="/dashboard" element={<Dashboard />} /> {/* ✅ Ensure Dashboard Route Exists */}
                 <Route path="/predict" element={<HeartDiseasePredictor />} />
                 <Route path="/result" element={<ResultPage />} />
+                <Route path="/learnmore" element={<LearnMore />} />
             </Routes>
         </Router>
     );
